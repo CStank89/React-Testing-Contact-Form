@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import ContactForm from "./ContactForm";
 
 test("Renders Contact form on ContactForm Copmponent", async () => {
@@ -8,12 +8,15 @@ test("Renders Contact form on ContactForm Copmponent", async () => {
   //Act
   const firstName = screen.getByText(/first Name/i);
   const lastName = screen.getByText(/last Name/i);
-  const email = screen.getByText(/email/i);
+  const email = screen.getByLabelText(/email/i);
   const message = screen.getByText(/message/i);
-  const submitB = screen.getByRole(/submit/i);
 
-  fireEvent.change(screen.getByText("Load Greeting"));
+  const submitButoon = screen.getByRole("button", { type: /submit/i });
+
+  fireEvent.change(email, { target: { value: "hello@mail.com" } });
 
   //Assert
-  expect(greeting).toBeInTheDocument();
+  //   expect(emailtext).toHaveTextContent('@')
+
+  //   expect(firstName).toBeInTheDocument();
 });
